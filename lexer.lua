@@ -1,7 +1,9 @@
 
 require "token"
 
-require "util"
+-- TODO there's too many tables in the reuslts at the end of lex
+-- TODO we need to be able to give an accurate location of the failure
+-- the character count isn't going to work
 
 function tryPatterns( input, start )
    
@@ -17,11 +19,7 @@ function tryPatterns( input, start )
 
             table.remove( result, #result )
 
-            if t.name ~= "ignore" then
-
-                tokens[#tokens + 1] = { token = t.name;  result }
-             
-            end
+            tokens[#tokens + 1] = { token = t.name;  result }
 
             return tokens, start
         end
@@ -46,7 +44,9 @@ function lex( input )
             error(  "failure: " .. string.sub( input,  start - 20, start + 20 ) .. "\n" .. string.sub( input, start, start ))
         end
 
-        tokens[#tokens + 1] = res
+        if res.token ~= "ignore" then
+            tokens[#tokens + 1] = res
+        end
 
     end
 
