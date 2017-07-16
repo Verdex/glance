@@ -1,27 +1,22 @@
 
 require "token"
 
--- TODO there's too many tables in the reuslts at the end of lex
 -- TODO we need to be able to give an accurate location of the failure
 -- the character count isn't going to work
 
 function tryPatterns( input, start )
    
-    local tokens = {}
-
     for _, t in ipairs( tokenPatterns ) do
         local pattern = "^" .. t.pattern .. "()"
         local result = { string.match( input, pattern, start ) }
 
         if result[1] then 
 
-            start = result[#result]
+            local stop = result[#result]
 
             table.remove( result, #result )
 
-            tokens[#tokens + 1] = { token = t.name;  result }
-
-            return tokens, start
+            return { token = t.name;  result }, stop
         end
     end
 
