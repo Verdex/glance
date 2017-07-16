@@ -14,10 +14,15 @@ function tryPatterns( input, start )
 
             local stop = result[#result]
 
+            if t.keyword and string.match( input, "^[_%w]", stop ) then
+                goto continue 
+            end
+    
             table.remove( result, #result )
 
             return { token = t.name;  result }, stop
         end
+        ::continue::
     end
 
     return false, start
