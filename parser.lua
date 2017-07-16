@@ -39,3 +39,6 @@ function is( tok )
     end
 end
 
+function done()
+    return _tokens[_index] == nil
+end
