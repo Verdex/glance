@@ -18,6 +18,9 @@ token( "langle", "<" )
 token( "rangle", ">" )
 token( "lcurly", "{" )
 token( "rcurly", "}" )
+token( "comma", "," )
+token( "semicolon", ";" )
+token( "colon", ":" )
 keyword( "var" )
 keyword( "const" )
 keyword( "if" )
@@ -39,7 +42,8 @@ keyword( "break" )
 keyword( "continue" )
 
 
-token( "symbol", "([_%a][_%w]*)" )
+token( "symbol", "(_[_%w]*)" )
+token( "symbol", "([%a][_%w]*)" )
 
 token( "ignore", "%s" )
 
